@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Gangezilla/image-search#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "node-bing-api": "^2.4.1"
   }
 }
