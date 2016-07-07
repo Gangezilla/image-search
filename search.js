@@ -3,9 +3,8 @@ var Bing = require('node-bing-api')({ accKey: "KLSI/YSbQ5HVplhPHmh5VF6TaTURK7H3f
 
 module.exports = {
     search: function(query, callback) {
-        Bing.images(query, { skip: 50 }, function(error, res, body) {
+        Bing.images(query, { skip: 1 }, function(error, res, body) {
             callback(body);
         });
     }
-
 };
