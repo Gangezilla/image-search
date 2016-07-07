@@ -26,24 +26,26 @@ app.get("/", function(req, res) {
 });
 
 app.get('/:query', function(req, res) {
+	//juuust make a new JSON object, with what you want in it?
+	var results= [];
 	search.search(req.params.query, function(body) {
-		console.log(body.d.results[0].length);
-		// for (var i=0; i<body.d.results.length;i++) {
-
-		// }
-		res.send(body.d.results);
+		//results[i].mediaUrl +=(body.d.results[i].MediaUrl);
+		for (var i=0; i<body.d.results.length;i++) {
+			 results.push({
+			 	ImageUrl: body.d.results[i].MediaUrl,
+			 	SourceUrl: body.d.results[i].SourceUrl,
+			 	Title: body.d.results[i].Title
+			 });
+		}
+		res.send(results);
 	});
 });
 
-//1: get connection to external search engine/site. okay, bing has an api (Bing Search API on microsoft azure), so does google (Google Custom Search). CHECK
-//2: take search parameter from up in URL
-//so, user inputs search term, that gets passed into search and searched, callback returns data, which is printed.
 //3: figure out how to paginate through results (two ways, i guess. one is to save the results in a buffer and just show a fixed number then show more? but thats cheating. the other way would be to ping the server a second time, show what number reuslt we are up to atm, and then ask for the next batch? how we do this, who knows, but we can figure it out.
-//implement recent history, which is going to be a mongo thing, sure. 
 
 
-// User Story: I can get the image URLs, alt text and page urls for a set of images relating to a given search string.
+// User Story: I can get the image URLs, alt text and page urls for a set of images relating to a given search string. DONE
 
 // User Story: I can paginate through the responses by adding a ?offset=2 parameter to the URL.
 
-// User Story: I can get a list of the most recently submitted search strings.
+// User Story: I can get a list of the most recently submitted search strings. DONE
