@@ -22,13 +22,14 @@ MongoClient.connect(url, function(err, db) {
     }
 });
 
-var port = process.env.port || 8080;
-app.listen(port, function() {
-    console.log("Hi there, I'm listening on " + port + ".");
+var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
+var server_host = process.env.YOUR_HOST || '0.0.0.0';
+server.listen(server_port, server_host, function() {
+    console.log('Listening on port %d', server_port);
 });
 
 app.get("/", function(req, res) {
-	res.send('<h1> Hello. Search? </h1> <p> This is a small tool to demonstrate an "image search abstraction layer" that acts as the sort of logic behind an image search. In the address bar up top, you can type in a query after the .com and you will see a list of images. You can paginate through these by adding "?offset=20" after your query. For example ".com/test?offset=5" You can check out some other things that have been searched for by typing in "...com/api/latest". All code is up on GitHub at https://github.com/Gangezilla/image-search so feel free to check it out.');
+	res.send('<h1> Hello. Search? </h1> <p> This is a small tool to demonstrate an "image search abstraction layer" that acts as the sort of logic behind an image search. In the address bar up top, you can type in a query after the .com and you will see a list of images. You can paginate through these by adding "?offset=20" after your query. For example ".com/test?offset=5" You can check out some other things that have been searched for by typing in "...com/api/latest". All code is up on GitHub at https://github.com/Gangezilla/image-search so feel free to check it out.</p>');
 });
 
 app.get('/:query', function(req, res) {
