@@ -22,7 +22,7 @@ MongoClient.connect(url, function(err, db) {
     }
 });
 
-var port = process.env.port || 8080;
+var port = process.env.port;
 app.listen(port, function() {
     console.log("Hi there, I'm listening on " + port + ".");
 });
