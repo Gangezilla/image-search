@@ -22,30 +22,20 @@ app.listen(port, function() {
 });
 
 app.get("/", function(req, res) {
-	res.send("<h1> Hello. Search? </h1>");
+	res.send('<h1> Hello. Search? </h1> <p> This is a small tool to demonstrate an "image search abstraction layer" that acts as the sort of logic behind an image search. In the address bar up top, you can type in a query after the .com and you will see a list of images. You can paginate through these by adding "?offset=20" after your query. You can check out some other things that have been searched for by typing in  ');
 });
 
 app.get('/:query', function(req, res) {
-	//juuust make a new JSON object, with what you want in it?
+	console.log(req.query.offset);
 	var results= [];
-	search.search(req.params.query, function(body) {
-		//results[i].mediaUrl +=(body.d.results[i].MediaUrl);
+	search.search(req.params.query, req.query.offset, function(body) {
 		for (var i=0; i<body.d.results.length;i++) {
 			 results.push({
 			 	ImageUrl: body.d.results[i].MediaUrl,
-			 	SourceUrl: body.d.results[i].SourceUrl,
+			 	PageUrl: body.d.results[i].SourceUrl,
 			 	Title: body.d.results[i].Title
 			 });
 		}
 		res.send(results);
 	});
 });
-
-//3: figure out how to paginate through results (two ways, i guess. one is to save the results in a buffer and just show a fixed number then show more? but thats cheating. the other way would be to ping the server a second time, show what number reuslt we are up to atm, and then ask for the next batch? how we do this, who knows, but we can figure it out.
-
-
-// User Story: I can get the image URLs, alt text and page urls for a set of images relating to a given search string.
-
-// User Story: I can paginate through the responses by adding a ?offset=2 parameter to the URL.
-
-// User Story: I can get a list of the most recently submitted search strings.

@@ -1,9 +1,12 @@
 var bingCode = process.env.bingCode;
-var Bing = require('node-bing-api')({ accKey: "KLSI/YSbQ5HVplhPHmh5VF6TaTURK7H3fsvRVzJ+KR8" });
+var Bing = require('node-bing-api')({ accKey: bingCode });
 
 module.exports = {
-    search: function(query, callback) {
-        Bing.images(query, { skip: 1 }, function(error, res, body) {
+    search: function(query, num, callback) {
+    	if (num===undefined) {
+    		num=1;
+    	}
+        Bing.images(query, { skip: num, top: 20 }, function(error, res, body) {
             callback(body);
         });
     }
